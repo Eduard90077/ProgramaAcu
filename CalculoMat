@@ -1,0 +1,394 @@
+from Tkinter import *
+from matplotlib.pylab import hist, show
+import tkMessageBox
+import numpy as np
+import ttk
+import matplotlib.pyplot as plt
+import math
+import matplotlib.pylab as plt
+    
+def graficagibo():
+    global axialest, modosto1
+    fig=plt.figure("Graficas", figsize=(10,9))
+    subplot1=fig.add_subplot(2,1,1)
+    subplot1.set_ylabel("Repeticiones")
+    subplot1.hist(axialest, bins=200, alpha=1)
+    plt.xticks(axialest, size = 'small', color = 'black', rotation = 90)
+    subplot1.legend(str(1))
+    
+    frecuenciaa = [20, 25, 31, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000]
+    fhz20 = []; fhz25 = []; fhz31 = []; fhz40 = []; fhz50 = []; fhz63 = []; fhz80 = []; fhz100 = []; fhz125 = []
+    fhz160 = []; fhz200 = []; fhz250 = []; fhz315 = []; fhz400 = []; fhz500 = []; fhz630 = []; fhz800 = []; fhz1000 = []
+    
+    for x in range(len(modosto1)):
+        if modosto1[x] >= 17.54 and modosto1[x] <= 22.10:fhz20.append(modosto1[x])
+        elif modosto1[x] >= 22.11 and modosto1[x] <= 27.84:fhz25.append(modosto1[x])
+        elif modosto1[x] >= 27.85 and modosto1[x] <= 35.08:fhz31.append(modosto1[x])
+        elif modosto1[x] >= 35.09 and modosto1[x] <= 44.19:fhz40.append(modosto1[x])
+        elif modosto1[x] >= 44.20 and modosto1[x] <= 55.68:fhz50.append(modosto1[x])
+        elif modosto1[x] >= 55.69 and modosto1[x] <= 70.15:fhz63.append(modosto1[x])
+        elif modosto1[x] >= 70.16 and modosto1[x] <= 88.39:fhz80.append(modosto1[x])
+        elif modosto1[x] >= 88.40 and modosto1[x] <= 111.4:fhz100.append(modosto1[x])
+        elif modosto1[x] >= 111.41 and modosto1[x] <= 140.30:fhz125.append(modosto1[x])
+        elif modosto1[x] >= 140.31 and modosto1[x] <= 176.8:fhz160.append(modosto1[x])
+        elif modosto1[x] >= 176.81 and modosto1[x] <= 222.7:fhz200.append(modosto1[x])
+        elif modosto1[x] >= 222.71 and modosto1[x] <= 280.61: fhz250.append(modosto1[x])
+        elif modosto1[x] >= 280.62 and modosto1[x] <= 353.6:fhz315.append(modosto1[x])
+        elif modosto1[x] >= 353.61 and modosto1[x] <= 445.4:fhz400.append(modosto1[x])
+        elif modosto1[x] >= 445.41 and modosto1[x] <= 561.2:fhz500.append(modosto1[x])
+        elif modosto1[x] >= 561.21 and modosto1[x] <= 707.1:fhz630.append(modosto1[x])
+        elif modosto1[x] >= 707.11 and modosto1[x] <= 890.9:fhz800.append(modosto1[x])
+        elif modosto1[x] >= 890.91 and modosto1[x] <= 1122:fhz1000.append(modosto1[x])
+            
+    ffhz20 = len(fhz20); ffhz25 = len(fhz25); ffhz31 = len(fhz31); ffhz40 = len(fhz40); ffhz50 = len(fhz50)
+    ffhz63 = len(fhz63); ffhz80 = len(fhz80); ffhz100 = len(fhz100); ffhz125 = len(fhz125); ffhz160 = len(fhz160)
+    ffhz200 = len(fhz200); ffhz250 = len(fhz250); ffhz315 = len(fhz315); ffhz400 = len(fhz400); ffhz500 = len(fhz500)
+    ffhz630 = len(fhz630); ffhz800 = len(fhz800); ffhz1000 = len(fhz1000)
+    #print(modosto1)
+    modosto2=len(modosto1)
+    valoresbo = [ffhz20, ffhz25, ffhz31, ffhz40, ffhz50, ffhz63, ffhz80, ffhz100, ffhz125, ffhz160, ffhz200, ffhz250, ffhz315, ffhz400, ffhz500, ffhz630, ffhz800, ffhz1000]
+    frecuenciaa1 = frecuenciaa[0:modosto2]
+    valoresbo1 = valoresbo[0:modosto2]
+    
+    u=0
+    k=410
+    for n in frecuenciaa1:
+        c=valoresbo1[u]
+        u=u+1
+        lblavaloresboventana = Label(ventana, text=" " + str(c) + " - Repeticiones en la banda de " + str(n) + " Hz", font=("Georgia", 12)).place(x=900, y=k)
+        k = k+20
+    
+    subplot2=fig.add_subplot(2,1,2)
+    subplot2.set_xlabel("Frecuencia (Hz)")
+    subplot2.set_ylabel('Repeticiones')
+    subplot2.plot(frecuenciaa1, valoresbo1)
+    subplot2.legend(str(2))
+    fig.suptitle("Grafica M. Gilford (1) y M. Bonello (2)")
+    plt.show()
+
+def dimensiones():
+    global spt, vol, alto, ancho, largo, artmate, ttootabs, lr
+    alto = float(ental.get())
+    ancho = float(entan.get())
+    largo = float(entla.get())
+    vol=alto*ancho*largo
+    spt=((alto*largo)*2)+((ancho*largo)*2)+((alto*ancho)*2)
+    lblvolumen = Label(ventana, text="" + str(vol) + "  metros.3", font=("Georgia", 14)).place(x=185,y=160)
+    lblsuperficie = Label(ventana, text="" + str(spt) + "  metros.2", font=("Georgia", 14)).place( x=185, y=180)
+    ttootabs = []
+    artmate = []
+    lr = 495
+    
+def ingresarmaterial():
+    global spt, artmate, ater, ttootabs, lr
+    
+    almate = float(entalmate.get())
+    lamate = float(entlamate.get())
+    armate = almate * lamate
+    artmate.append(armate)
+    atmatet = np.sum(artmate, axis=0)
+    
+    at=combo.get()
+    if at == ("NUEVO MATERIAL"):
+        at = ("Nm. " + entalmatene.get())
+        nuucoe125 = float(nucoe125.get())
+        nuucoe250 = float(nucoe250.get())
+        nuucoe500 = float(nucoe500.get())
+        nuucoe1k = float(nucoe1K.get())
+        nuucoe2k = float(nucoe2K.get())
+        nuucoe4k = float(nucoe4K.get())
+        ater = [nuucoe125, nuucoe250, nuucoe500, nuucoe1k, nuucoe2k, nuucoe4k]
+    elif at == ("Al. Alfombra sobre pared"):ater = [0.09, 0.08, 0.21, 0.27, 0.27, 0.37]
+    elif at == ("Al. Alfombra pesada sobre goma es."):ater = [0.08, 0.24, 0.57, 0.69, 0.71, 0.73]
+    elif at == ("Al. Alfombra media sobre base es."):ater = [0.03, 0.09, 0.25, 0.31, 0.33, 0.44]
+    elif at == ("Fi. Placas de fibra 16mm (Arm Min)"):ater = [0.30, 0.32, 0.54, 0.74, 0.67, 0.60]
+    elif at == ("LV. Placa LV con lamina vinilo sp"):ater = [0.57, 0.39, 0.41, 0.82, 0.89, 0.72]
+    elif at == ("Ho. Bloque de hormigon grueso"):ater = [0.36, 0.44, 0.31, 0.29, 0.39, 0.25]
+    elif at == ("Ho. Bloque de hormigon pintado"):ater = [0.01, 0.05, 0.06, 0.07, 0.09, 0.08]
+    elif at == ("Ma. Losa de marmol"):ater = [0.01, 0.01, 0.01, 0.01, 0.02, 0.02]
+    elif at == ("La. Ladrillo liso mezcla al ras"):ater = [0.02, 0.03, 0.03, 0.04, 0.05, 0.07]
+    elif at == ("Ho. Hormigon pintado"):ater = [0.01, 0.01, 0.01, 0.02, 0.02, 0.02]
+    elif at == ("Ho. Hormigon suavizado sin pintar"):ater = [0.01, 0.01, 0.02, 0.02, 0.02, 0.05]
+    elif at == ("LV. Panel rigido LV con film PVC"):ater = [0.68, 0.64, 0.61, 0.81, 0.66, 0.39]
+    elif at == ("Co. Revestimineto de corcho"):ater = [0.12, 0.27, 0.72, 0.79, 0.76, 0.77]
+    elif at == ("Co. Pavimento de corcho (Dekwall)"):ater = [0.04, 0.03, 0.05, 0.11, 0.07, 0.02]
+    elif at == ("Co. Baldosas contra respaldo solido"):ater = [0.05, 0.10, 0.20, 0.55, 0.60, 0.55]
+    elif at == ("Go. Alfombra de goma"):ater = [0.03, 0.04, 0.06, 0.08, 0.07, 0.05]
+    elif at == ("Pi. LP estampada 3.18 cm x 15.2 de profunidad"):ater = [0.19, 0.23, 0.43, 0.37, 0.58, 0.62]
+    elif at == ("Fie. Fieltro punzado adh concreto"):ater = [0.01, 0.02, 0.05, 0.15, 0.03, 0.4]
+    elif at == ("Re. Revoque de cal y arena"):ater = [0.04, 0.05, 0.06, 0.08, 0.04, 0.06]
+    elif at == ("Bu. Sillas vacias tapizadas tela"):ater = [0.44, 0.60, 0.77, 0.89, 0.82, 0.70]
+    elif at == ("Bu. Sillas vacias tapizadas cuero"):ater = [0.40, 0.50, 0.58, 0.61, 0.58, 0.50]
+    elif at == ("Mad. Parquet madera sobre hormigon"):ater = [0.04, 0.04, 0.07, 0.06, 0.06, 0.07]
+    elif at == ("Mad. Fibra de madera"):ater = [0.04, 0.24, 0.54, 0.88, 0.53, 0.70]
+    elif at == ("Mad. Placa sobre estructura 50cm LM"):ater = [0.25, 0.15, 0.10, 0.09, 0.08, 0.07]
+    elif at == ("Mad. PLaca aglomerado (8+30mm aire)"):ater = [0.25, 0.20, 0.04, 0.4, 0.04, 0.04]
+    elif at == ("Mad. Piso sobre viguetas"):ater = [0.15, 0.11, 0.10, 0.07, 0.06, 0.07]
+    elif at == ("Te. Cortina algodon p 3/4 area 130mm"):ater = [0.30, 0.45, 0.65, 0.56, 0.59, 0.71]
+    elif at == ("Te. Cortina terciopelo lijero colgadas en pared"):ater = [0.03, 0.04, 0.11, 0.17, 0.24, 0.35]
+    elif at == ("Te. Cortina terciopelo mediana, p 50p"):ater = [0.07, 0.31, 0.49, 0.75, 0.70, 0.60]
+    elif at == ("Pe. Publico en silla M. 100p oupada"):ater = [0.57, 0.61, 0.75, 0.86, 0.91, 0.86]
+    elif at == ("Pe. Orquesta con instrumentos 1.5m2 pp"):ater = [0.27, 0.53, 0.67, 0.93, 0.87, 0.80]
+    elif at == ("Pe. Adulto de pie"):ater = [0.21, 0.33, 0.41, 0.42, 0.46, 0.42]
+    elif at == ("Vi. Ventana de dole vidrio"):ater = [0.25, 0.10, 0.07, 0.06, 0.04, 0.02]
+    elif at == ("Vi. Espejo"):ater = [0.04, 0.03, 0.02, 0.01, 0.07, 0.04]
+    elif at == ("Vi. Pano grande de vidrio duro"):ater = [0.18, 0.06, 0.04, 0.03, 0.02, 0.02]
+    elif at == ("Ye. Placa yeso 13+400mm lana de vidrio"):ater = [0.20, 0.12, 0.09, 0.03, 0.02, 0.02]
+    elif at == ("Ye. Placa yeso sobre estructura 13mm"):ater = [0.08, 0.11, 0.05, 0.03, 0.02, 0.03]
+    elif at == ("Ye. Placa yeso 13+650mm lana de vidrio"):ater = [0.05, 0.05, 0.05, 0.03, 0.02, 0.02]
+
+    lblalarmate = Label(ventana, text=" " + str(at ) +  " = " + str(armate) + "  (m2)", 
+                        font=("Georgia", 12)).place(x=34, y=lr)
+    totalsuper = spt - atmatet
+    lblalarmatepc = Label(ventana, text=" " + str(totalsuper), font=("Georgia", 12)).place(x=245, y=310)
+    lr = lr + 20
+    coeficiente125 = ater[0]; tobaabst125 = armate*coeficiente125; coeficiente250 = ater[1]; tobaabst250 = armate*coeficiente250
+    coeficiente500 = ater[2]; tobaabst500 = armate*coeficiente500; coeficiente1k = ater[3]; tobaabst1k = armate*coeficiente1k
+    coeficiente2k = ater[4]; tobaabst2k = armate*coeficiente2k; coeficiente4k = ater[5]; tobaabst4k = armate*coeficiente4k
+
+    ttoabst=[tobaabst125, tobaabst250, tobaabst500, tobaabst1k, tobaabst2k, tobaabst4k]
+    #print(abstto)
+
+    ttootabs.append(ttoabst)
+    absttoof = np.array(ttootabs)
+    
+def calcular():
+    global ttootabs, spt, vol, alto, ancho, largo, f2, axiales1, axialest, tangencial1, oblicuos1, modosto1
+    
+    absttoof=np.sum(ttootabs, axis=0)
+    #print(absttoof)
+
+    tabst125 = absttoof[0]; mcoemid125 = tabst125/spt; rcoemid125 = round(mcoemid125, 3); tabst250 = absttoof[1]
+    mcoemid250 = tabst250/spt; rcoemid250 = round(mcoemid250, 3)
+    tabst500 = absttoof[2]; mcoemid500 = tabst500/spt; rcoemid500 = round(mcoemid500, 3); tabst1k = absttoof[3]
+    mcoemid1k = tabst1k/spt; rcoemid1k = round(mcoemid1k, 3)
+    tabst2k = absttoof[4]; mcoemid2k = tabst2k/spt; rcoemid2k = round(mcoemid2k, 3); tabst4k = absttoof[5]
+    mcoemid4k = tabst4k/spt; rcoemid4k = round(mcoemid4k, 3)
+    
+    lblalabsttoo = Label(ventana, text=" " + str(rcoemid125) + " - " + str(rcoemid250) + " - " + str(rcoemid500) + " - " + str(rcoemid1k) + " - " + str(rcoemid2k) + " - " + str(rcoemid4k),
+                         font=("Georgia", 12)).place(x=335, y=125)
+    
+    ffcoeffdprom = (mcoemid500+mcoemid1k)/2
+    rcoeffdprom = round(ffcoeffdprom, 5)
+    mabstmedia = spt*ffcoeffdprom
+    rtmedia = (0.161*vol)/(mabstmedia)
+    rrtmedia = round(rtmedia, 2)
+    f2 = 2000*math.sqrt(rtmedia/vol)
+    rf2 = round(f2, 2)
+    
+    lblalabsttoo = Label(ventana, text=" " + str(mabstmedia) + " Sabine (m2)", 
+                         font=("Georgia", 16)).place(x=335, y=200)
+    lblalabsttoo = Label(ventana, text=" " + str(rcoeffdprom), 
+                         font=("Georgia", 16)).place(x=335, y=270)
+    lblalabsttoo = Label(ventana, text=" " + str(rrtmedia) + " Segundos", 
+                         font=("Georgia", 16)).place(x=335, y=340)
+    lblalabsttoo = Label(ventana, text=" " + str(rf2) + " Hz", 
+                         font=("Georgia", 16)).place(x=335, y=410)
+    
+    f2f = 0; j = 1; u1 = 80; axiales1=[]
+    while (f2f <= f2):
+        f2f=(340/2)*(j/largo)
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f),
+                             font=("Georgia", 12)).place(x=630, y=u1)
+        lblalmidprom = Label(ventana, text=" " + str(j) + ",0" + ",0", 
+                             font=("Georgia", 12)).place(x=665, y=u1)
+        j = j+1; u1 = u1 + 20; axiales1.append(f2f)
+        
+    f2f = 0; j = 1; u2 = 80; axiales2=[]
+    while (f2f <= f2):
+        f2f=(340/2)*(j/ancho)
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f),
+                             font=("Georgia", 12)).place(x=715, y=u2)
+        lblalmidprom = Label(ventana, text=" " + "0," + str(j) + ",0", 
+                             font=("Georgia", 12)).place(x=750, y=u2)
+        j = j+1; u2 = u2 + 20; axiales2.append(f2f)
+        
+    f2f = 0; j = 1; u3 = 80; axiales3=[]
+    while (f2f <= f2):
+        f2f=(340/2)*(j/alto)
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f),
+                             font=("Georgia", 12)).place(x=800, y=u3)
+        lblalmidprom = Label(ventana, text=" " + "0," + "0," + str(j), 
+                             font=("Georgia", 12)).place(x=835, y=u3)
+        j = j+1; u3 = u3 + 20; axiales3.append(f2f)
+        
+    axialest = (axiales1+axiales2+axiales3)
+    axialest.sort()
+    
+    #
+    
+    f2f = 0; j = 1; j2 = 1; u1 = 410; tangencial1 = []
+    while (f2f <= f2):
+        f2f = (340 / 2) * math.sqrt(((j / largo)**2) + ((j2 / ancho)**2))
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f), font=("Georgia", 12)).place(x=630, y=u1)
+        lblalmidprom = Label(ventana, text=" " + str(j) + "," + str(j2) + ",0", font=("Georgia", 12)).place(x=665, y=u1)
+        j2 = j2 + 1; u1 = u1 + 20; tangencial1.append(f2f)
+        
+    f2f = 0; j = 1; j2 = 1; u2 = 410; tangencial2 = []
+    while (f2f <= f2):
+        f2f = (340 / 2) * math.sqrt(((j / ancho)**2) + ((j2 / alto)**2))
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f), font=("Georgia", 12)).place(x=715, y=u2)
+        lblalmidprom = Label(ventana, text=" " + "0," + str(j) + "," + str(j2), font=("Georgia", 12)).place(x=750, y=u2)
+        j2 = j2 + 1; u2 = u2 + 20; tangencial2.append(f2f)
+    
+    f2f = 0; j = 1; j2 = 1; u3 = 410; tangencial3 = []
+    while (f2f <= f2):
+        f2f = (340 / 2) * math.sqrt(((j / largo)**2) + ((j2 / alto)**2))
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f), font=("Georgia", 12)).place(x=800, y=u3)
+        lblalmidprom = Label(ventana, text=" " + str(j2) + "," + "0," + str(j), font=("Georgia", 12)).place(x=835, y=u3)
+        j2 = j2 + 1; u3 = u3 + 20; tangencial3.append(f2f)
+
+    tangencialest = (tangencial1 + tangencial2 + tangencial3)
+    tangencialest.sort()
+    #
+    
+    f2f = 0; j = 1; j2 = 1; j3 = 1; u1 = 80; oblicuos1 = []
+    while (f2f <= f2):
+        f2f = (340 / 2) * math.sqrt(((j / largo) ** 2) + ((j2 / ancho) ** 2) + ((j3 / alto) ** 2))
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f), font=("Georgia", 12)).place(x=900, y=u1)
+        lblalmidprom = Label(ventana, text=" " + str(j) + "," + str(j2) + "," + str(j3), 
+                             font=("Georgia", 12)).place(x=935,y=u1)
+        j3 = j3 + 1; u1 = u1 + 20; oblicuos1.append(f2f)
+        
+    f2f = 0; j = 1; j2 = 1; j3 = 1; u2 = 80; oblicuos2 = []
+    while (f2f <= f2):
+        f2f = (340 / 2) * math.sqrt(((j / largo) ** 2) + ((j3 / ancho) ** 2) + ((j2 / alto) ** 2))
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f), font=("Georgia", 12)).place(x=985, y=u2)
+        lblalmidprom = Label(ventana, text=" " + str(j) + "," + str(j3) + "," + str(j2), 
+                             font=("Georgia", 12)).place(x=1020, y=u2)
+        j3 = j3 + 1; u2 = u2 + 20; oblicuos2.append(f2f)
+        
+    f2f = 0; j = 1; j2 = 1; j3 = 1; u3 = 80; oblicuos3 = []
+    while (f2f <= f2):
+        f2f = (340 / 2) * math.sqrt(((j3 / largo) ** 2) + ((j / ancho) ** 2) + ((j2 / alto) ** 2))
+        rf2f = round(f2f, 2)
+        lblalmidprom = Label(ventana, text=" " + str(rf2f), font=("Georgia", 12)).place(x=1070, y=u3)
+        lblalmidprom = Label(ventana, text=" " + str(j3) + "," + str(j) + "," + str(j2), 
+                             font=("Georgia", 12)).place(x=1105, y=u3)
+        j3 = j3 + 1; u3 = u3 + 20; oblicuos3.append(f2f)
+
+    oblicuost = (oblicuos1 + oblicuos2 + oblicuos3)
+    oblicuost.sort()
+    modosto1 = (axiales1 + tangencial1 + oblicuos1)
+    modosto1.sort()
+
+ventana=Tk()
+
+canvas = Canvas(width=40, height=30)
+canvas.pack(expand=YES, fill=BOTH)
+canvas.create_line(317, 40, 317, 700)
+canvas.create_line(617, 40, 617, 700)
+canvas.create_line(887, 40, 887, 700)
+canvas.create_line(710, 80, 710, 350)
+canvas.create_line(794, 80, 794, 350)
+canvas.create_line(710, 410, 710, 700)
+canvas.create_line(794, 410, 794, 700)
+canvas.create_line(980, 80, 980, 350)
+canvas.create_line(1064, 80, 1064, 350)
+ventana.geometry("1160x750+5+5")
+ventana.title(" Calculo de materiales en sala")
+textodimen=Label(text="Ingrese dimensiones de la sala",fg="black",font=("Georgia",20) ).place(x=30,y=30)
+lblalto=Label(text="Alto (m)",fg="black",font=("Georgia",14) ).place(x=40,y=65)
+ental=StringVar()
+ental.set("")
+txtusuario=Entry(ventana,textvariable=ental,width=6).place(x=35,y=93)
+lblalto=Label(text="Ancho (m)",fg="black",font=("Georgia",14) ).place(x=135,y=65)
+entan=StringVar()
+entan.set("")
+txtusuario=Entry(ventana,textvariable=entan,width=6).place(x=135,y=93)
+lblalto=Label(text="Largo (m)",fg="black",font=("Georgia",14) ).place(x=235,y=65)
+entla=StringVar()
+entla.set("")
+txtusuario=Entry(ventana,textvariable=entla,width=6).place(x=235,y=93)
+btndime=Button(ventana,text="Dimensiones",command=dimensiones, height=2,width=34, font=("Georgia",12)).place(x=35,y=120)
+lblvolumen = Label(ventana, text="Volumen de la sala: ", font=("Georgia", 15)).place(x=35,y=160)
+lblsuperficie = Label(ventana, text="Superficie de la sala: ", font=("Georgia", 15)).place( x=35, y=180)
+textomate=Label(text="Seleccione materiales y medida",fg="black",font=("Georgia",20) ).place(x=30,y=210)
+combo=ttk.Combobox(ventana,height=28,width=37, font=("Georgia",12))
+combo.place(x=30,y=245)
+combo['values'] = ('', 'NUEVO MATERIAL',
+    'Al. Alfombra sobre pared', 'Al. Alfombra pesada sobre goma es.', 'Al. Alfombra media sobre base es.', 'Fi. Placas de fibra 16mm (Arm Min)',
+    'LV. Placa LV con lamina vinilo sp', 'Ho. Bloque de hormigon grueso', 'Ho. Bloque de hormigon pintado',"Ma. Losa de marmol", 
+    "La. Ladrillo liso mezcla al ras", "Ho. Hormigon pintado", "Ho. Hormigon suavizado sin pintar", "LV. Panel rigido LV con film PVC", "Co. Revestimineto de corcho", 
+    "Co. Pavimento de corcho (Dekwall)", "Co. Baldosas contra respaldo solido", "Go. Alfombra de goma", "Pi. LP estampada 3.18 cm x 15.2 de profunidad", 
+    "Fie. Fieltro punzado adh concreto", "Re. Revoque de cal y arena", "Bu. Sillas vacias tapizadas tela", "Bu. Sillas vacias tapizadas cuero", 
+    "Mad. Parquet madera sobre hormigon", "Mad. Fibra de madera", "Mad. Placa sobre estructura 50cm LM", "Mad. PLaca aglomerado (8+30mm aire)", 
+    "Mad. Piso sobre viguetas", "Te. Cortina algodon p 3/4 area 130mm", "Te. Cortina terciopelo lijero colgadas en pared", 
+    "Te. Cortina terciopelo mediana, p 50p", "Pe. Publico en silla M. 100p oupada", "Pe. Orquesta con instrumentos 1.5m2 pp", "Pe. Adulto de pie", 
+    "Vi. Ventana de dole vidrio", "Vi. Espejo", "Vi. Pano grande de vidrio duro", "Ye. Placa yeso 13+400mm lana de vidrio", 
+    "Ye. Placa yeso sobre estructura 13mm", "Ye. Placa yeso 13+650mm lana de vidrio")
+combo.current(0)
+
+lblaltomate=Label(text="Alto (m)",fg="black",font=("Georgia",14) ).place(x=35,y=280)
+entalmate=StringVar()
+entalmate.set("")
+txtusuario=Entry(ventana,textvariable=entalmate,width=6).place(x=35,y=305)
+
+lbllargomate=Label(text="Largo (m)",fg="black",font=("Georgia",14) ).place(x=135,y=280)
+entlamate=StringVar()
+entlamate.set("")
+txtusuario=Entry(ventana,textvariable=entlamate,width=6).place(x=135,y=305)
+
+lblaltomate=Label(text="Ingrese nuevo material y coheficientes abs",fg="black",font=("Georgia",14) ).place(x=35,y=345)
+entalmatene=StringVar()
+entalmatene.set("")
+txtusuario=Entry(ventana,textvariable=entalmatene,width=28).place(x=35,y=370)
+
+lblaltomate=Label(text="C.125",fg="black",font=("Georgia",12) ).place(x=35,y=405)
+nucoe125=StringVar()
+nucoe125.set("")
+txtusuario=Entry(ventana,textvariable=nucoe125,width=3).place(x=35,y=425)
+
+lblaltomate=Label(text="C.250",fg="black",font=("Georgia",12) ).place(x=75,y=405)
+nucoe250=StringVar()
+nucoe250.set("")
+txtusuario=Entry(ventana,textvariable=nucoe250,width=3).place(x=75,y=425)
+
+lblaltomate=Label(text="C.500",fg="black",font=("Georgia",12) ).place(x=115,y=405)
+nucoe500=StringVar()
+nucoe500.set("")
+txtusuario=Entry(ventana,textvariable=nucoe500,width=3).place(x=115,y=425)
+
+lblaltomate=Label(text="C.1K",fg="black",font=("Georgia",12) ).place(x=155,y=405)
+nucoe1K=StringVar()
+nucoe1K.set("")
+txtusuario=Entry(ventana,textvariable=nucoe1K,width=3).place(x=155,y=425)
+
+lblaltomate=Label(text="C.2K",fg="black",font=("Georgia",12) ).place(x=195,y=405)
+nucoe2K=StringVar()
+nucoe2K.set("")
+txtusuario=Entry(ventana,textvariable=nucoe2K,width=3).place(x=195,y=425)
+
+lblaltomate=Label(text="C.4K",fg="black",font=("Georgia",12) ).place(x=235,y=405)
+nucoe4K=StringVar()
+nucoe4K.set("")
+txtusuario=Entry(ventana,textvariable=nucoe4K,width=3).place(x=235,y=425)
+
+lblalto=Label(text="Por cubrir",fg="black",font=("Georgia",14) ).place(x=235,y=280)
+btningres=Button(ventana,text="Ingresar material",command=ingresarmaterial, 
+                 height=2,width=34, font=("Georgia",12)).place(x=35,y=455)
+btndime=Button(ventana,text="Calcular valores",command=calcular, 
+               height=2,width=34, font=("Georgia",12)).place(x=335,y=30)
+textomate=Label(text="Absorcion total por frecuencia",fg="black",font=("Georgia",20) ).place(x=335,y=70)
+textomate=Label(text="125Hz - 250Hz - 500Hz - 1kHz - 2kHz - 4kHz",fg="black",font=("Georgia",12) ).place(x=335,y=100)
+textomate=Label(text="Absorcion media",fg="black",font=("Georgia",20) ).place(x=335,y=170)
+textomate=Label(text="Alfa medio promediado",fg="black",font=("Georgia",20) ).place(x=335,y=240)
+textomate=Label(text="Tiempo de reverberacion (RT)",fg="black",font=("Georgia",20) ).place(x=335,y=310)
+textomate=Label(text="Frec. Shoroder (f2)",fg="black",font=("Georgia",20) ).place(x=335,y=380)
+lblaaxialestod = Label(ventana, text=" Modos Axiales", font=("Georgia", 16)).place(x=630, y=40)
+lblatangencialestod = Label(ventana, text=" Modos Tangenciales", font=("Georgia", 16)).place(x=630, y=370)
+lblaoblicuostod = Label(ventana, text=" Modos Oblicuos", font=("Georgia", 16)).place(x=900, y=40)
+lblavaloresbono = Label(ventana, text=" Valores grafica M. Bonello", font=("Georgia", 16)).place(x=900, y=370)
+btngraficagibo=Button(ventana,text="Graficas Gilford y Bonello",command=graficagibo, 
+                      height=2,width=34, font=("Georgia",12)).place(x=335,y=475)
+imagenL=PhotoImage(file="cajaj.gif")
+lblImagen=Label(ventana,image=imagenL).place(x=355,y=535)
+ventana.mainloop()
